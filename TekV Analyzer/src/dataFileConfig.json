@@ -1,0 +1,15 @@
+{
+
+	"hrData" :{
+		"path"		:"..\\dataFiles\\",
+		"file"		:"hrData.csv",
+		"header"	:"hrDataHeader.csv"
+		
+	},
+	
+	"adData" :{
+		"path"		:"..\\dataFiles\\",
+		"file"		:"adData.csv",
+		"header"	:"adDataHeader.csv" 		
+	}
+}
