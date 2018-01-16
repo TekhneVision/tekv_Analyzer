@@ -1,3 +1,5 @@
+
+
 '''
 Created on Jan 14, 2018
 
@@ -5,7 +7,9 @@ Created on Jan 14, 2018
 '''
 import json
 import csv
-import iteratorUtil as util
+import iteratorUtil as iUtil
+import util
+
 
 
 # Retrieve path for the data files to be analyzed.
@@ -28,11 +32,18 @@ def getFileData(fileId, requestType): # fileId is json parent id and Request typ
     fileList = _openFile(filePath) 
     
     if requestType == 'header':        
-        return util.unwrapListOfLists(fileList)
+        return iUtil.unwrapListOfLists(fileList)
     else:
-        return util.unwrapList(fileList)
+        return iUtil.unwrapList(fileList)
 
        
    
+def create_CSV_File(dataSet, fileName):
+    with open('..\\dataFiles\\'+fileName+'.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, dialect='excel')
+        util.printList(dataSet)
+        writer.writerows(dataSet)
+
+
 
 

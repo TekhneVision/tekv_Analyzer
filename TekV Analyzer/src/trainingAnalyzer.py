@@ -3,14 +3,9 @@ Created on Jan 15, 2018
 
 @author: Jerime
 '''
-import dataFileUtil
-import util
 
-
-# Identify individuals who have not taken training or have outdated training dates
-def identifyMissedTraning(timeFrame, dataSetId):
-    dataSet = dataFileUtil.getFileData(dataSetId, 'file')
-    
+# Search for records with missing dates.
+def identifyMissingDates(dataSet):       
     nonCompliant = []
     compliant = []
     
@@ -21,18 +16,20 @@ def identifyMissedTraning(timeFrame, dataSetId):
         else:
             compliant.append(row)
  
-    result = [compliant, nonCompliant]
+    result = [compliant, nonCompliant]# Returns a list of list (Compliant and nonCompliant)
     return result
     
 
 
-
-
-timeFrame = {
-    'from':'01/01/2017',
-    'to':'12/31/2017'
-}
-
-result = identifyMissedTraning(timeFrame, 'hrData')
-
-util.printList(result[1])
+def compareDataSets(dataSets, headerKey):# index of the column/header that will be compared.
+    dataSetA = dataSets[0]
+    dataSetB = dataSets[1]
+    
+    for rowA in dataSetA:
+        for rowB in dataSetB:
+            if rowA[headerKey] == rowB[headerKey]:
+                print('TODO')
+        
+    
+    
+    
