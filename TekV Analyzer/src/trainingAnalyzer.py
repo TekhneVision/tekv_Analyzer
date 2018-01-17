@@ -4,13 +4,16 @@ Created on Jan 15, 2018
 @author: Jerime
 '''
 
+import util
+
+
 # Search for records with missing dates.
 def identifyMissingDates(dataSet):       
     nonCompliant = []
     compliant = []
     
     for row in dataSet:
-        year = row[4]
+        year = row[5]
         if year == "":
             nonCompliant.append(row)
         else:
@@ -21,14 +24,39 @@ def identifyMissingDates(dataSet):
     
 
 
-def compareDataSets(dataSets, headerKey):# index of the column/header that will be compared.
-    dataSetA = dataSets[0]
-    dataSetB = dataSets[1]
+def compareDataSets(datasets, comparatorValue, messageList):# index of the column/header that will be compared.
+    masterDataset = datasets[0]
+    masterMessage = messageList[0]
+    datasetB = datasets[1]
+    messageB = messageList[1]
     
-    for rowA in dataSetA:
-        for rowB in dataSetB:
-            if rowA[headerKey] == rowB[headerKey]:
-                print('TODO')
+    key = comparatorValue
+    result = []
+   
+    # Compare masterDataset to datasetB   
+    for rowA in masterDataset:
+        matchFound = False
+        for rowB in datasetB:
+            if rowA[key] == rowB[key]:
+                matchFound = True
+        
+        if not matchFound:
+            rowA.append(masterMessage)
+            result.append(rowA)
+            
+    # Compare datasetB to masterDataset        
+    for rowB in datasetB:
+        matchFound = False
+        for rowA in masterDataset:
+            if rowB[key] == rowA[key]:
+                matchFound = True
+        
+        if not matchFound:
+            rowB.append(messageB)
+            result.append(rowB)        
+     
+    return result
+            
         
     
     
