@@ -26,34 +26,27 @@ def identifyMissingDates(dataSet):
 
 def compareDataSets(datasets, comparatorValue, messageList):# index of the column/header that will be compared.
     masterDataset = datasets[0]
-    masterMessage = messageList[0]
+    message = messageList[0]
     datasetB = datasets[1]
-    messageB = messageList[1]
+
     
     key = comparatorValue
     result = []
-   
+    
     # Compare masterDataset to datasetB   
     for rowA in masterDataset:
         matchFound = False
+        masterString = rowA[key].strip()
+        
         for rowB in datasetB:
-            if rowA[key] == rowB[key]:
-                matchFound = True
-        
-        if not matchFound:
-            rowA.append(masterMessage)
-            result.append(rowA)
+            stringB = rowB[key].strip()
             
-    # Compare datasetB to masterDataset        
-    for rowB in datasetB:
-        matchFound = False
-        for rowA in masterDataset:
-            if rowB[key] == rowA[key]:
+            if masterString == stringB:
                 matchFound = True
         
         if not matchFound:
-            rowB.append(messageB)
-            result.append(rowB)        
+            rowA.append(message)
+            result.append(rowA)   
      
     return result
             
