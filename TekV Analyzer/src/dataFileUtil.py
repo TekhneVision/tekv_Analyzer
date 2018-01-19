@@ -40,8 +40,7 @@ def getFileData(fileId, requestType): # fileId is json parent id and Request typ
    
 def create_CSV_File(dataSet, fileName):
     with open('..\\dataFiles\\'+fileName+'.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, dialect='excel')
-        util.printList(dataSet)
+        writer = csv.writer(csvfile, dialect='excel')        
         writer.writerows(dataSet)
 
 

@@ -24,11 +24,43 @@ def identifyMissingDates(dataSet):
     
 
 
+def filterComparisonReport(cReport, datasetB, comparatorValue):
+    
+    key = comparatorValue
+    filteredDataset = []
+    nameList = []
+    result = []
+    # Compare masterDataset to datasetB   
+    for rowA in cReport:
+        matchFound = False
+        masterString = rowA[key].strip()
+        
+        for rowB in datasetB:
+            stringB = rowB[key].strip()
+            
+            if masterString in stringB:
+                matchFound = True
+                names = [masterString, stringB]
+                nameList.append(names)
+        
+        if not matchFound:
+            filteredDataset.append(rowA)  
+            
+    result.append(filteredDataset)
+    result.append(nameList)
+    return result
+    
+
+
+
+
+
+
+
 def compareDataSets(datasets, comparatorValue, messageList):# index of the column/header that will be compared.
     masterDataset = datasets[0]
     message = messageList[0]
     datasetB = datasets[1]
-
     
     key = comparatorValue
     result = []
@@ -42,13 +74,17 @@ def compareDataSets(datasets, comparatorValue, messageList):# index of the colum
             stringB = rowB[key].strip()
             
             if masterString == stringB:
-                matchFound = True
+                matchFound = True                
         
         if not matchFound:
             rowA.append(message)
-            result.append(rowA)   
+            result.append(rowA) 
+            
      
     return result
+
+
+    
             
         
     
