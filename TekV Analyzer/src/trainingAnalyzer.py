@@ -51,15 +51,8 @@ def filterComparisonReport(cReport, datasetB, comparatorValue):
     return result
     
 
-
-
-
-
-
-
-def compareDataSets(datasets, comparatorValue, messageList):# index of the column/header that will be compared.
+def compareDataSets(datasets, comparatorValue, message):# index of the column/header that will be compared.
     masterDataset = datasets[0]
-    message = messageList[0]
     datasetB = datasets[1]
     
     key = comparatorValue
@@ -79,12 +72,30 @@ def compareDataSets(datasets, comparatorValue, messageList):# index of the colum
         if not matchFound:
             rowA.append(message)
             result.append(rowA) 
-            
-     
+                 
     return result
 
 
     
+            
+def calculateTotalBySite(report):  
+    siteKey = {}
+    
+    for row in report:
+        key = row[1]
+        if key not in siteKey:
+            siteKey[key]= 1
+        else:
+            siteKey[key] += 1
+        
+    return siteKey
+
+
+
+
+        
+        
+        
             
         
     
